@@ -5,11 +5,11 @@ import type { SubagentConfig, Subagent } from '@/types/subagent';
 /**
  * Subagent Configuration Loader
  * 
- * Loads subagent definitions from .gemini/agents directory
+ * Loads subagent definitions from .spark/agents directory
  * Each subagent is defined in a separate .json or .yaml file
  */
 
-const DEFAULT_AGENTS_DIR = '.gemini/agents';
+const DEFAULT_AGENTS_DIR = '.spark/agents';
 
 export interface LoaderOptions {
   agentsDir?: string;
