@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SparkPluginManifest",
+  "description": "Schema for Spark plugin manifest files",
+  "type": "object",
+  "required": ["id", "name", "version", "provides"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique plugin identifier",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Plugin description"
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "url": { "type": "string", "format": "uri" }
+      },
+      "required": ["name"]
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri"
+    },
+    "license": {
+      "type": "string"
+    },
+    "sparkVersion": {
+      "type": "string",
+      "description": "Required Spark version range"
+    },
+    "provides": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["command", "agent", "hook", "skill", "mcp-server"]
+      },
+      "minItems": 1
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "configSchema": {
+      "type": "object",
+      "description": "JSON Schema for plugin configuration"
+    }
+  }
+}

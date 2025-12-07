@@ -1,0 +1,22 @@
+{
+  "id": "example-plugin",
+  "name": "Example Plugin",
+  "version": "1.0.0",
+  "description": "An example plugin demonstrating the plugin system",
+  "author": {
+    "name": "Matrix Agent"
+  },
+  "repository": "https://github.com/mariarudushibd/spark-agent",
+  "license": "MIT",
+  "sparkVersion": ">=1.0.0",
+  "provides": ["command", "hook", "skill"],
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "greeting": {
+        "type": "string",
+        "default": "Hello"
+      }
+    }
+  }
+}
