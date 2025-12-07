@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MultiActionPlan",
+  "description": "Schema for Gemini 3 multi-action plans",
+  "type": "object",
+  "required": ["id", "name", "description", "actions"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the plan"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for the plan"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of what the plan accomplishes"
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PlanAction"
+      },
+      "description": "List of actions to execute"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional metadata for the plan"
+    }
+  },
+  "definitions": {
+    "PlanAction": {
+      "type": "object",
+      "required": ["id", "name", "description", "target", "parameters"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the action"
+        },
+        "name": {
+          "type": "string",
+          "description": "Action name"
+        },
+        "description": {
+          "type": "string",
+          "description": "What this action does"
+        },
+        "target": {
+          "$ref": "#/definitions/ActionTarget"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Parameters to pass to the action"
+        },
+        "order": {
+          "type": "number",
+          "description": "Execution order (lower = earlier)"
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "IDs of actions this depends on"
+        }
+      }
+    },
+    "ActionTarget": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["mcp", "subagent"],
+          "description": "Target type"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "MCP server ID (for mcp type)"
+        },
+        "agentId": {
+          "type": "string",
+          "description": "Subagent ID (for subagent type)"
+        }
+      }
+    }
+  }
+}
